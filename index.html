@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="text-align: center;">
+    <button id="draw" onclick="lottery()" style="margin: 30px;">PLAY</button>
+</div>
+
+<script>
+  buyers = ['lukasz', 'bogusz', 'magda', 'halinka', 'daria']
+  receivers = ['lukasz', 'bogusz', 'magda', 'halinka', 'daria']
+
+  function getRandomPerson (max, arr) {
+    return arr[Math.floor(Math.random() * Math.floor(max))]
+  }
+
+  const lottery = () => {
+    const noPeople = buyers.length
+    buyer = getRandomPerson(noPeople, buyers)
+    alert(`\nLottery for ${buyer}`)
+
+    //in case if there is the same buyer and receiver left
+    if (noPeople === 1 && buyers[0] === receivers[0]) {
+      alert('\n\n!!!!!!!!!!!!!!\nERROR\n!!!!!!!!!!!!!!\n\n\nPlease repeat the lottery')
+      location.reload()
+      return
+    }
+    if (noPeople === 1) {
+      alert(`You buy present for ${receivers[0]}`)
+      alert('\n\n!!!!!!!!!!!!!!\nSUCCESS\n!!!!!!!!!!!!!!\n')
+      window.close()
+      return
+    }
+
+
+    do {
+      receiver = getRandomPerson(noPeople, receivers)
+    }
+    while (buyer === receiver)
+    //remove receiver and buyer from list
+    receivers.splice(receivers.indexOf(receiver), 1)
+    buyers.splice(buyers.indexOf(buyer), 1)
+    alert(`You buy present for ${receiver}`)
+  }
+
+</script>
+</body>
+</html>
